@@ -1,0 +1,56 @@
+using System;
+
+namespace SimpleMenu
+{
+	class MainClass
+	{
+		public static void Main (string[] args)
+		{
+			string loopround = " ",	inpvar = "0";													// define loop control variable and set to SPACE
+			int BevChoice = 0;																		// define and set BevChoice to 0 to make initial invalid response
+
+			while (loopround != "END") {															// start the loop set to end only if END in caps is typed
+				Console.WriteLine ("Please Select a Beverage");										// display menu
+				Console.WriteLine ();
+				Console.WriteLine ("[1] Decaf Coke");
+				Console.WriteLine ("[2] Coke");
+				Console.WriteLine ("[3] Orange");
+				Console.WriteLine ("[4] Lemonade");
+				Console.WriteLine ();
+				Console.WriteLine ("Please Made a Selection 1,2, 3 or 4: ");
+
+				inpvar = Console.ReadLine ();														// read menu option as a text value
+
+				bool isnumeric = int.TryParse (inpvar, out BevChoice);								// test & parse numeric and define bool result to true or false
+				if (isnumeric == false) BevChoice = 0;												// if it returned an error because of non-numeric set choice to 0
+
+				if (BevChoice >= 1 & BevChoice <= 4) {												// verify that the choice is within the range of options in menu
+					Console.Write ("Thank you, Here is your ");							
+
+					switch (BevChoice) {															// select an action based on the choice made to display the 
+					case 1:
+						Console.Write ("Caffeine Free ");
+					case 2:																			// beverage type correctly for the option that was selected
+						Console.WriteLine ("Coke.");
+						break;
+
+					case 3:
+						Console.WriteLine ("Orange.");
+						break;
+
+					case 4:																			// note that 'default:' was not used as this would require the
+						Console.WriteLine ("Lemonade.");										    // repeat of the Thank you and Enjoy text sections in all cases
+						break;																		// rather than using them just once with a boolean if then else
+					}																				// to do the same thing. Making for a smaller overall object code
+					Console.WriteLine ();
+					Console.WriteLine ("Enjoy your Beverage, Thank you!");							// display a nice message after the Thank you message
+				
+				} else 
+					Console.WriteLine ("Error - you have not picked a valid option!");				// the option was outside the range available show error
+				Console.WriteLine ();
+				Console.Write ("enter END to finish with this task or press enter to do again: ");	// ask for either enter or the word END
+				loopround = Console.ReadLine ();													// then modify loopround variable from keyboard entry
+			}
+		}
+	}
+}
