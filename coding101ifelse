@@ -1,3 +1,10 @@
+// A simple menu that loops until the user responds to the question to end with all Caps END
+// uses a numeric choice and parses a response from the menu.
+// utilizes the Switch and Case rather than numerous if-else to simplify the amount of code
+// since using switch and case is far simpler to use for this task though could be done 
+// just as easily with four if commands instead.
+//
+//
 using System;
 
 namespace SimpleMenu
@@ -6,11 +13,15 @@ namespace SimpleMenu
 	{
 		public static void Main (string[] args)
 		{
-			string loopround = " ",	inpvar = "0";													// define loop control variable and set to SPACE
-			int BevChoice = 0;																		// define and set BevChoice to 0 to make initial invalid response
+			// define loop control variable and set to SPACE
+			// define and set BevChoice to 0 to make initial invalid response
+			string loopround = " ",	inpvar = "0";
+			int BevChoice = 0;
 
-			while (loopround != "END") {															// start the loop set to end only if END in caps is typed
-				Console.WriteLine ("Please Select a Beverage");										// display menu
+			// start the loop set to end only if END in caps is typed
+			while (loopround != "END") {
+				// display menu
+				Console.WriteLine ("Please Select a Beverage");
 				Console.WriteLine ();
 				Console.WriteLine ("[1] Decaf Coke");
 				Console.WriteLine ("[2] Coke");
@@ -19,18 +30,25 @@ namespace SimpleMenu
 				Console.WriteLine ();
 				Console.WriteLine ("Please Made a Selection 1,2, 3 or 4: ");
 
-				inpvar = Console.ReadLine ();														// read menu option as a text value
+				// read menu option as a text value
+				inpvar = Console.ReadLine ();
 
-				bool isnumeric = int.TryParse (inpvar, out BevChoice);								// test & parse numeric and define bool result to true or false
-				if (isnumeric == false) BevChoice = 0;												// if it returned an error because of non-numeric set choice to 0
+				// test & parse numeric and define bool result to true or false
+				bool isnumeric = int.TryParse (inpvar, out BevChoice);
+				// if it returned an false status because of non-numeric set choice to 0 to make it numeric but not valid option
+				if (isnumeric == false) BevChoice = 0;
 
-				if (BevChoice >= 1 & BevChoice <= 4) {												// verify that the choice is within the range of options in menu
+				// verify that the choice is within the range of options in menu
+				if (BevChoice >= 1 & BevChoice <= 4) {
 					Console.Write ("Thank you, Here is your ");							
-
-					switch (BevChoice) {															// select an action based on the choice made to display the 
-					case 1:
+					// select an action based on the choice made to display the 
+					// beverage type correctly for the option that was selected
+					// note rather than have lots of if..else functions use switch and case
+					// which simplifies cost
+					switch (BevChoice) {
+					case 1:		// if option one is chosen then insert extra text b4 Coke
 						Console.Write ("Caffeine Free ");
-					case 2:																			// beverage type correctly for the option that was selected
+					case 2:		// if option 1 or option 2 used then case 2 will run
 						Console.WriteLine ("Coke.");
 						break;
 
@@ -38,18 +56,26 @@ namespace SimpleMenu
 						Console.WriteLine ("Orange.");
 						break;
 
-					case 4:																			// note that 'default:' was not used as this would require the
-						Console.WriteLine ("Lemonade.");										    // repeat of the Thank you and Enjoy text sections in all cases
-						break;																		// rather than using them just once with a boolean if then else
-					}																				// to do the same thing. Making for a smaller overall object code
+					case 4:	
+						Console.WriteLine ("Lemonade.");
+						break;
+					}	
+					// no default was used because it would require repeated code rather than use a simple if..else. to deal with this.
 					Console.WriteLine ();
-					Console.WriteLine ("Enjoy your Beverage, Thank you!");							// display a nice message after the Thank you message
+					// display a nice message after the Thank you message
+					Console.WriteLine ("Enjoy your Beverage, Thank you!");
 				
 				} else 
-					Console.WriteLine ("Error - you have not picked a valid option!");				// the option was outside the range available show error
+					// the option was outside the range available show error
+					Console.WriteLine ("Error - you have not picked a valid option!");
 				Console.WriteLine ();
-				Console.Write ("enter END to finish with this task or press enter to do again: ");	// ask for either enter or the word END
-				loopround = Console.ReadLine ();													// then modify loopround variable from keyboard entry
+
+				// ask for either enter or the word END in caps
+				// then modify loopround variable from keyboard entry 
+				// since the while loop only checks for END in caps all other options will allow it to loop
+
+				Console.Write ("enter END to finish with this task or press enter to do again: ");	
+				loopround = Console.ReadLine ();
 			}
 		}
 	}
